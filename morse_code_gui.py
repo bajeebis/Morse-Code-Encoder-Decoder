@@ -17,10 +17,10 @@ class MorseGUI:
         self._note_message()
 
     def _entry_points(self):
-        self.entry_value = Entry(root, width=50, bd=4)
-        self.results = Entry(root, state="disabled", width=50, bd=4)
+        self.entry_value = Entry(root, width=120, bd=4)
+        self.results = Entry(root, state="disabled", width=120, bd=4)
 
-        self.entry_value.grid(row=0, column=0, padx=10, pady=5)
+        self.entry_value.grid(row=0, column=0, padx=10, pady=5, ipady=2)
         self.results.grid(row=1, column=0, padx=10, pady=10, ipady=5)
 
     def _buttons(self):
@@ -34,8 +34,8 @@ class MorseGUI:
         self.note.grid(row=3, column=0)
 
     def encode_function(self):
-        result = self.entry_value.get()
         self.results.delete(0, END)
+        result = self.entry_value.get()
         self.results.insert(0, self.morse_functions.encode_morse(result))
 
     def decode_function(self):
@@ -45,8 +45,8 @@ class MorseGUI:
 
     def encode_or_decode(self):
         x = self.entry_value.get()
-        split_entry = [_ for _ in x.split()]
-        if "." in split_entry or "-" in split_entry:
+        split_entry = [_ for _ in x]
+        if "." in x and "-" in split_entry:
             self.results.config(state=NORMAL)
             self.decode_function()
             self.results.config(state="readonly")
